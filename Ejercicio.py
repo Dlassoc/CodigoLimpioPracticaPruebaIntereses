@@ -1,7 +1,10 @@
 def calcular_cuota_mensual(valor_prodcto, interes, cuotas):
     if interes == 0:
         return 0
-    elif monto > 0.12
+    elif interes >= 0.12:
+        return "NO ES POSIBLE"
+    elif cuotas == 1:
+        return 0
     else:
 
         cuota_mes = (valor_prodcto * interes) / (1 - (1 + interes)**(-cuotas))

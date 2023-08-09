@@ -34,12 +34,24 @@ class MyTestCase(unittest.TestCase):
 
     def testPayment4(self):
         valor_prodcto = 480000
-        interes = 0
+        interes = 0.125
         cuotas = 48
-        valor_total_intereses = 0
+        valor_total_intereses = "NO ES POSIBLE"
         resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
-        # Usar assertAlmostEqual para comparar valores flotantes con tolerancia
-        self.assertAlmostEqual(valor_total_intereses, resultado, places=2)  # places indica la cantidad de decimales a comparar
+
+        # Verificar si el resultado es igual a "NO ES POSIBLE" o 0
+        self.assertEqual(valor_total_intereses, resultado)
+
+
+    def testPayment4(self):
+        valor_prodcto = 480000
+        interes = 0.125
+        cuotas = 48
+        valor_total_intereses = "NO ES POSIBLE"
+        resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
+
+        # Verificar si el resultado es igual a "NO ES POSIBLE" o 0
+        self.assertEqual(valor_total_intereses, resultado)
 
 if __name__ == '__main__':
     unittest.main()
