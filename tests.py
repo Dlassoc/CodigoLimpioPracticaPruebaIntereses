@@ -43,14 +43,23 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(valor_total_intereses, resultado)
 
 
-    def testPayment4(self):
-        valor_prodcto = 480000
-        interes = 0.125
-        cuotas = 48
-        valor_total_intereses = "NO ES POSIBLE"
+    def testPayment5(self):
+        valor_prodcto = 0
+        interes = 0.024
+        cuotas = 60
+        valor_total_intereses =  "El valor del producto debe ser mayor a 0"
         resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
 
-        # Verificar si el resultado es igual a "NO ES POSIBLE" o 0
+        self.assertEqual(valor_total_intereses, resultado)
+
+
+    def testPayment6(self):
+        valor_prodcto = 50000
+        interes = 0.01
+        cuotas = -10
+        valor_total_intereses =  "Las cuotas no pueden ser negativas"
+        resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
+
         self.assertEqual(valor_total_intereses, resultado)
 
 if __name__ == '__main__':
