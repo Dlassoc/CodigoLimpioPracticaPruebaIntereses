@@ -86,7 +86,7 @@ class MyTestCase(unittest.TestCase):
         interes = 0.031
         extra = 53000
         plan = Ejercicio.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra)
-        self.assertEqual(len(plan), cuotas)
+        self.assertEqual(len(plan), cuotas)#a
 
 if __name__ == '__main__':
     unittest.main()
