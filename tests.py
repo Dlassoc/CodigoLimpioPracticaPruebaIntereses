@@ -78,17 +78,24 @@ class MyTestCase(unittest.TestCase):
         plan = Ejercicio.plan_amortizacion(cuota_mes, valor_producto, cuotas, interes)
         self.assertEqual(len(plan), cuotas)
 
-    def test_plan_amortizacion_extra(self):
+    def test_plan_amortizacion_extra_1(self):
         cuota_mes = 9297.96
         valor_producto = 200000
-        cuotas = 36
+        cuotas = 27
         interes = 0.031
         extra = 53000
         plan = Ejercicio.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra, 10)
-        print(len(plan))
-
         self.assertEqual(len(plan), cuotas)
 
+
+    def test_plan_amortizacion_extra_2(self):
+        cuota_mes = 52377
+        valor_producto = 850000
+        cuotas = 23
+        interes = 0.034
+        extra = 90000
+        plan = Ejercicio.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra, 10)
+        self.assertEqual(len(plan), cuotas)
 
 if __name__ == '__main__':
     unittest.main()
