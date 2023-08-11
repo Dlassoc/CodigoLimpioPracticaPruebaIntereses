@@ -39,22 +39,31 @@ def plan_amortizacion(cuota_mes, valor_producto, cuotas, interes):
     return plan_amortizacion_datos
 
 
-def plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, abono_extra):
+def plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, abono_extra, cuota_mes_extra):
     tabla_amortizacion = []
     saldo_restante = valor_producto
+    mes = 0
 
-    for i in range(1, cuotas + 1):
-        pago_interes = saldo_restante * interes
-        abono_capital = cuota_mes - pago_interes
-        if i == 10:
-            saldo_restante -= abono_extra
+    while saldo_restante > 0:
+        mes += 1
+        cuota_real = cuota_mes
+
+        if mes == cuota_mes_extra:  # Aplicar el abono extra en el mes especificado
+            pago_interes = saldo_restante * interes
+            abono_capital = abono_extra - pago_interes
+        else:
+            pago_interes = saldo_restante * interes
+            abono_capital = cuota_real - pago_interes
+
+        if abono_capital > saldo_restante:
+            abono_capital = saldo_restante
+
         saldo_restante -= abono_capital
-        if saldo_restante < 0:
-            saldo_restante = 0  # Asegurarse de que el saldo no sea negativo
+
         cuota_info = {
-            "Mes": i,
+            "Mes": mes,
             "Saldo Inicial": saldo_restante + abono_capital,
-            "Pago Mensual": cuota_mes,
+            "Pago Mensual": cuota_real,
             "Intereses": pago_interes,
             "Capital": abono_capital,
             "Saldo Restante": saldo_restante
