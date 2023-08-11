@@ -11,7 +11,8 @@ class MyTestCase(unittest.TestCase):
         valor_total_intereses = 134726.53
         resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
         # Usar assertAlmostEqual para comparar valores flotantes con tolerancia
-        self.assertAlmostEqual(valor_total_intereses, resultado, places=2)  # places indica la cantidad de decimales a comparar
+        self.assertAlmostEqual(valor_total_intereses, resultado,
+                               places=2)  # places indica la cantidad de decimales a comparar
 
     def testPayment2(self):
         valor_prodcto = 850000
@@ -20,8 +21,8 @@ class MyTestCase(unittest.TestCase):
         valor_total_intereses = 407059.97
         resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
         # Usar assertAlmostEqual para comparar valores flotantes con tolerancia
-        self.assertAlmostEqual(valor_total_intereses, resultado, places=2)  # places indica la cantidad de decimales a comparar
-
+        self.assertAlmostEqual(valor_total_intereses, resultado,
+                               places=2)  # places indica la cantidad de decimales a comparar
 
     def testPayment3(self):
         valor_prodcto = 480000
@@ -30,7 +31,8 @@ class MyTestCase(unittest.TestCase):
         valor_total_intereses = 0
         resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
         # Usar assertAlmostEqual para comparar valores flotantes con tolerancia
-        self.assertAlmostEqual(valor_total_intereses, resultado, places=2)  # places indica la cantidad de decimales a comparar
+        self.assertAlmostEqual(valor_total_intereses, resultado,
+                               places=2)  # places indica la cantidad de decimales a comparar
 
     def testPayment4(self):
         valor_prodcto = 480000
@@ -42,22 +44,20 @@ class MyTestCase(unittest.TestCase):
         # Verificar si el resultado es igual a "NO ES POSIBLE" o 0
         self.assertEqual(valor_total_intereses, resultado)
 
-
     def testPayment5(self):
         valor_prodcto = 0
         interes = 0.024
         cuotas = 60
-        valor_total_intereses =  "El valor del producto debe ser mayor a 0"
+        valor_total_intereses = "El valor del producto debe ser mayor a 0"
         resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
 
         self.assertEqual(valor_total_intereses, resultado)
-
 
     def testPayment6(self):
         valor_prodcto = 50000
         interes = 0.01
         cuotas = -10
-        valor_total_intereses =  "Las cuotas no pueden ser negativas"
+        valor_total_intereses = "Las cuotas no pueden ser negativas"
         resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
 
         self.assertEqual(valor_total_intereses, resultado)
@@ -78,15 +78,15 @@ class MyTestCase(unittest.TestCase):
         plan = Ejercicio.plan_amortizacion(cuota_mes, valor_producto, cuotas, interes)
         self.assertEqual(len(plan), cuotas)
 
-
     def test_plan_amortizacion_extra(self):
         cuota_mes = 9297.96
         valor_producto = 480000
         cuotas = 27
-        interes = 0.031
+        interes = 0
         extra = 53000
         plan = Ejercicio.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra)
-        self.assertEqual(len(plan), cuotas)#aa
+        self.assertEqual(len(plan), cuotas)
+
 
 if __name__ == '__main__':
     unittest.main()

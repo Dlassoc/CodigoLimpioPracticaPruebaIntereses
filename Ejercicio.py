@@ -23,9 +23,14 @@ def plan_amortizacion(cuota_mes, valor_producto, cuotas, interes):
     saldo_restante = valor_producto
 
     for mes in range(1, cuotas + 1):
-        pago_interes = saldo_restante * interes
-        abono_capital = cuota_mes - pago_interes
-        saldo_restante -= abono_capital
+        if interes == 0:
+            pago_interes = 0
+            abono_capital = cuota_mes
+            saldo_restante -= abono_capital
+        else:
+            pago_interes = saldo_restante * interes
+            abono_capital = cuota_mes - pago_interes
+            saldo_restante -= abono_capital
 
         plan_amortizacion_datos.append({
             "Mes": mes,
@@ -39,26 +44,30 @@ def plan_amortizacion(cuota_mes, valor_producto, cuotas, interes):
     return plan_amortizacion_datos
 
 
-def plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, abono_extra):
-    tabla_amortizacion = []
+
+def plan_amortizacion(cuota_mes, valor_producto, cuotas, interes, extra):
+    plan_amortizacion_datos = []
     saldo_restante = valor_producto
 
-    for i in range(1, cuotas + 1):
-        pago_interes = saldo_restante * interes
-        abono_capital = cuota_mes - pago_interes
-        if i == 10:
-            saldo_restante -= abono_extra
-        saldo_restante -= abono_capital
-        if saldo_restante < 0:
-            saldo_restante = 0  # Asegurarse de que el saldo no sea negativo
-        cuota_info = {
-            "Mes": i,
+    for mes in range(1, cuotas + 1):
+        if interes == 0:
+            if mes == 10:
+                pago_interes = 0
+                abono_capital = cuota_mes + extra
+                saldo_restante -= abono_capital
+        else:
+            pago_interes = saldo_restante * interes
+            abono_capital = cuota_mes - pago_interes
+            saldo_restante -= abono_capital
+
+        plan_amortizacion_datos.append({
+            "Mes": mes,
             "Saldo Inicial": saldo_restante + abono_capital,
             "Pago Mensual": cuota_mes,
             "Intereses": pago_interes,
             "Capital": abono_capital,
             "Saldo Restante": saldo_restante
-        }
-        tabla_amortizacion.append(cuota_info)
-    print(tabla_amortizacion)
-    return tabla_amortizacion
+        })
+
+    return plan_amortizacion_datos
+
