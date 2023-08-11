@@ -74,15 +74,22 @@ class MyTestCase(unittest.TestCase):
         cuota_mes = 10000
         valor_producto = 480000
         cuotas = 48
-        interes = 0
-        plan = Ejercicio.plan_amortizacion(cuota_mes, valor_producto, cuotas, interes)
-        self.assertEqual(len(plan), cuotas)
+        interes = 12
+
+        try:
+            plan = Ejercicio.plan_amortizacion(cuota_mes, valor_producto, cuotas, interes)
+            # si no generó excepcion, quedo mal hecho el codigo
+            self.assertEqual(False, True, "No se generó la excepción")
+        except Ejercicio.TasaExcesiva:
+            print("hola")
+            pass  # Forzar Exito
+
 
     def test_plan_amortizacion_extra(self):
         cuota_mes = 9297.96
         valor_producto = 480000
         cuotas = 27
-        interes = 0
+        interes = 12
         extra = 53000
         plan = Ejercicio.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra)
         self.assertEqual(len(plan), cuotas)

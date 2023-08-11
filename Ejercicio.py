@@ -1,3 +1,7 @@
+class TasaExcesiva(Exception):
+    pass
+
+
 def calcular_cuota_mensual(valor_prodcto, interes, cuotas):
     if interes == 0 or cuotas == 1:
         return 0
@@ -22,6 +26,9 @@ def plan_amortizacion(cuota_mes, valor_producto, cuotas, interes):
     plan_amortizacion_datos = []
     saldo_restante = valor_producto
 
+    if interes*12 > 100:
+       raise TasaExcesiva("La tasa es muy alta")
+
     for mes in range(1, cuotas + 1):
         if interes == 0:
             pago_interes = 0
@@ -44,17 +51,18 @@ def plan_amortizacion(cuota_mes, valor_producto, cuotas, interes):
     return plan_amortizacion_datos
 
 
-
-def plan_amortizacion(cuota_mes, valor_producto, cuotas, interes, extra):
+def plan_amortizacion_extra(cuota_mes, valor_producto, cuotas, interes, extra):
     plan_amortizacion_datos = []
     saldo_restante = valor_producto
+    if interes > 12:
+        return "NO ES POSIBLE, TASA MUY ALTA "
 
     for mes in range(1, cuotas + 1):
         if interes == 0:
             if mes == 10:
                 pago_interes = 0
                 abono_capital = cuota_mes + extra
-                saldo_restante -= abono_capital
+                saldo_restante = abono_capital - extra
         else:
             pago_interes = saldo_restante * interes
             abono_capital = cuota_mes - pago_interes
@@ -70,4 +78,3 @@ def plan_amortizacion(cuota_mes, valor_producto, cuotas, interes, extra):
         })
 
     return plan_amortizacion_datos
-
