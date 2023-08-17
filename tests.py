@@ -1,6 +1,5 @@
 import unittest
-import Ejercicio
-
+from Ejercicio import Ejercicio
 
 class MyTestCase(unittest.TestCase):
 
@@ -92,8 +91,8 @@ class MyTestCase(unittest.TestCase):
 
 
     def test_plan_amortizacion_extra_2(self):
-        cuota_mes = 52377
-        valor_producto = 850000
+        cuota_mes = 52377.50
+        valor_producto = 850000.00
         cuotas = 23
         interes = 0.034
         extra = 90000
@@ -116,8 +115,8 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual(str(e), "El abono debe ser mayor a la cuota base ")
 
     def test_plan_amortizacion_extra_3(self):
-        cuota_mes = 52377
-        valor_producto = 850000
+        cuota_mes: float = 52377.50
+        valor_producto = 850000.00
         cuotas = 23
         interes = 0.034
         extra = 90000
