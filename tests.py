@@ -1,5 +1,7 @@
 import unittest
-from Ejercicio import Ejercicio
+import plan_amortizacion
+import plan_amortizacion_extra
+import Ejercicio
 
 class MyTestCase(unittest.TestCase):
 
@@ -8,7 +10,7 @@ class MyTestCase(unittest.TestCase):
         interes = 0.031
         cuotas = 36
         valor_total_intereses = 134726.53
-        resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
+        resultado = Ejercicio.Cuota_mensual.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
         # Usar assertAlmostEqual para comparar valores flotantes con tolerancia
         self.assertAlmostEqual(valor_total_intereses, resultado,
                                places=2)  # places indica la cantidad de decimales a comparar
@@ -18,7 +20,7 @@ class MyTestCase(unittest.TestCase):
         interes = 0.034
         cuotas = 24
         valor_total_intereses = 407059.97
-        resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
+        resultado = Ejercicio.Cuota_mensual.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
         # Usar assertAlmostEqual para comparar valores flotantes con tolerancia
         self.assertAlmostEqual(valor_total_intereses, resultado,
                                places=2)  # places indica la cantidad de decimales a comparar
@@ -28,7 +30,7 @@ class MyTestCase(unittest.TestCase):
         interes = 0
         cuotas = 48
         valor_total_intereses = 0
-        resultado = Ejercicio.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
+        resultado = Ejercicio.Cuota_mensual.calcular_cuota_mensual(valor_prodcto, interes, cuotas)
         # Usar assertAlmostEqual para comparar valores flotantes con tolerancia
         self.assertAlmostEqual(valor_total_intereses, resultado,
                                places=2)  # places indica la cantidad de decimales a comparar
@@ -38,7 +40,7 @@ class MyTestCase(unittest.TestCase):
         interes = 0.125
         cuotas = 48
         try:
-            resultado = Ejercicio.calcular_cuota_mensual(valor_producto, interes, cuotas)
+            resultado = Ejercicio.Cuota_mensual.calcular_cuota_mensual(valor_producto, interes, cuotas)
         except Ejercicio.Except_Valor as e:
             self.assertEqual(str(e), "El valor supera los intereses óptimos")
 
@@ -47,7 +49,7 @@ class MyTestCase(unittest.TestCase):
         interes = 0.024
         cuotas = 60
         try:
-            resultado = Ejercicio.calcular_cuota_mensual(valor_producto, interes, cuotas)
+            resultado = Ejercicio.Cuota_mensual.calcular_cuota_mensual(valor_producto, interes, cuotas)
         except Ejercicio.Except_Valor as e:
             self.assertEqual(str(e), "El valor del producto debe ser mayor a 0")
 
@@ -56,7 +58,7 @@ class MyTestCase(unittest.TestCase):
         interes = 0.01
         cuotas = -10
         try:
-            resultado = Ejercicio.calcular_cuota_mensual(valor_producto, interes, cuotas)
+            resultado = Ejercicio.Cuota_mensual.calcular_cuota_mensual(valor_producto, interes, cuotas)
         except Ejercicio.Except_Valor as e:
             self.assertEqual(str(e), "Las cuotas no pueden ser negativas")
 
@@ -66,7 +68,7 @@ class MyTestCase(unittest.TestCase):
         cuotas = 36
         interes = 0.031
         try:
-            plan = Ejercicio.plan_amortizacion(cuota_mes, valor_producto, cuotas, interes)
+            plan = plan_amortizacion.plan_amortizacion_logica(cuota_mes, valor_producto, cuotas, interes)
         except Ejercicio.Except_Valor as e:
            self.assertEqual(str(e), "Las cuotas no pueden ser negativas")
 
@@ -76,7 +78,7 @@ class MyTestCase(unittest.TestCase):
         cuotas = 48
         interes = 0
         try:
-            plan = Ejercicio.plan_amortizacion(cuota_mes, valor_producto, cuotas, interes)
+            plan = plan_amortizacion.plan_amortizacion_logica(cuota_mes, valor_producto, cuotas, interes)
         except Ejercicio.Except_Valor as e:
             self.assertEqual(str(e), "Las cuotas no pueden ser negativas")
 
@@ -86,7 +88,9 @@ class MyTestCase(unittest.TestCase):
         cuotas = 27
         interes = 0.031
         extra = 53000
-        plan = Ejercicio.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra, 10)
+        mes_abono_extra = 5
+
+        plan = plan_amortizacion_extra.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra, mes_abono_extra)
         self.assertEqual(len(plan), cuotas)
 
 
@@ -97,7 +101,7 @@ class MyTestCase(unittest.TestCase):
         interes = 0.034
         extra = 90000
         mes_abono_extra = 5
-        plan = Ejercicio.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra, mes_abono_extra)
+        plan = plan_amortizacion_extra.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra,mes_abono_extra)
         self.assertEqual(len(plan), cuotas)
 
 
@@ -109,12 +113,12 @@ class MyTestCase(unittest.TestCase):
         extra = 90000
         mes_abono_extra = 10
         try:
-            plan = Ejercicio.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra, mes_abono_extra)
+            plan = plan_amortizacion_extra.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra, mes_abono_extra)
 
         except Ejercicio.Except_Valor as e:
             self.assertEqual(str(e), "El abono debe ser mayor a la cuota base ")
 
-    def test_plan_amortizacion_extra_3(self):
+    def test_plan_amortizacion_extra_4(self):
         cuota_mes: float = 52377.50
         valor_producto = 850000.00
         cuotas = 23
@@ -122,7 +126,7 @@ class MyTestCase(unittest.TestCase):
         extra = 90000
         mes_abono_extra = 22
         try:
-            plan = Ejercicio.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra, mes_abono_extra)
+            plan = plan_amortizacion_extra.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra, mes_abono_extra)
 
         except Ejercicio.Except_Valor as e:
             self.assertEqual(str(e), "El abono debe ser mayor a la cuota base ")
