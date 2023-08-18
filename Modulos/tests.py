@@ -88,7 +88,7 @@ class MyTestCase(unittest.TestCase):
         cuotas = 27
         interes = 0.031
         extra = 53000
-        mes_abono_extra = 5
+        mes_abono_extra = 10
 
         plan = plan_amortizacion_extra.plan_amortizacion_pago_extra(cuota_mes, valor_producto, cuotas, interes, extra, mes_abono_extra)
         self.assertEqual(len(plan), cuotas)
