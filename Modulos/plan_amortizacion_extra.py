@@ -9,12 +9,13 @@ def plan_amortizacion_pago_extra(cuota_mes: float, valor_producto: float, cuotas
 
     mes = 0
     while saldo_restante > 0 and mes < cuotas:
+        # Esta parte de codigo calcula el interes y los pagos
         mes += 1
         cuota_real = Decimal(str(cuota_mes))
-
         pago_interes = saldo_restante * Decimal(str(interes))
         abono_capital = cuota_real - pago_interes
 
+        # Esta parte se aplica el pago extra si es posible
         if mes == cuota_mes_extra:
             if abono_extra >= cuota_real:
                 abono_capital = abono_extra - pago_interes
