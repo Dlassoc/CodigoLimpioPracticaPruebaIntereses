@@ -1,3 +1,4 @@
-En este repositorio se encontrará la actividad #1 de codigo limpio, plan de amortizacion realizado por Daniel Lasso.
-Para correr el programa tiene que ejecutar un archivo en carpeta Test -> (test.py), ese es el archivo que se debe ejecutar.
-*PARA EJECUTAR LAS PRUEBAS POR EL USUARIO (INGRESANDO DATOS), debe ejecutar los modulos que están en la carpeta Graphic part y ejectuar cada archivo .py.
+In this repository you will find the #1 clean code activity, amortization plan made by Daniel Lasso.
+To run the program you have to run a file in the folder Test -> (test.py), that's the file to run.
+*TO RUN THE TESTS BY THE USER (INPUTING DATA), you must run the modules that are in the Graphic part folder and run each .py file.
+The module of savings programmed_program.py in process, remember that one does not enter in the qualification of the delivery 2, thanks.
