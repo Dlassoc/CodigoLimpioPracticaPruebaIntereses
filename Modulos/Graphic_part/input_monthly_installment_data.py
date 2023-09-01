@@ -1,4 +1,4 @@
-from exercise import MonthlyInstallment
+from Modulos.Logical.exercise import MonthlyInstallment
 
 
 def monthly_installment_data():
