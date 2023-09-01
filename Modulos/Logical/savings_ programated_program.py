@@ -1,5 +1,5 @@
 class Savings:
-    #EXCERCISE FOR THE SAVINGS IN PROCESS... THIS MODULE NOT ABOUT THE DELIVERY 2
+    # EXCERCISE FOR THE SAVINGS IN PROCESS... THIS MODULE NOT ABOUT THE DELIVERY 2
     def __init__(self, monthly_payment: int, interest: int, estimated_savings: int):
         self.monthly_payment = monthly_payment
         self.interest = interest / 100
