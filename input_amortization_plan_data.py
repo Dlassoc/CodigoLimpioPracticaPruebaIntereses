@@ -1,4 +1,5 @@
 from Modulos.Logical.amortization_plan import amortization_plan_logic
+
 def datos_amortizacion():
     print("Este programa le permite calcular la cuota mensual a pagar por una compra con tarjeta de credito")
     cuota_mes = int(input("Ingrese la cuota mensual"))

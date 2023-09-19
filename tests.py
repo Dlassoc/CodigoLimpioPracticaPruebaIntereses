@@ -1,7 +1,6 @@
 import unittest
 from Modulos.Logical import amortization_plan, exercise, amortization_plan_with_extra_payment_file
 
-
 class MyTestCase(unittest.TestCase):
 
     def test_payment_1(self):
